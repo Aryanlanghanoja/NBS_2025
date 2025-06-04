@@ -7,9 +7,10 @@ vector<int> Input_Array() {
     cout << "Enter -1 to Stop." << endl;
     int input;
 
-    while(input != -1) {
+    while (true) {
         cin >> input;
-
+        if (input == -1)
+            break;
         Array.push_back(input);
     }
 
@@ -31,11 +32,17 @@ void Print_Result(int max) {
     cout << "The Maximum Element in the Array is " << max << ".";
 }
 
-int main() {
+void Solve() {
 
     vector<int> Array = Input_Array();
     int max_element = Find_Max(Array);
     Print_Result(max_element);
 
+    return;
+}
+
+int main() {
+
+    Solve();
     return 0;
 }
