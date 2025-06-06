@@ -7,7 +7,30 @@ bool Is_Prime(int n) {
         return false;
     }
 
-    for (int i = 2; i <= (n / i); i++) {
+    if(n % 2 == 0) {
+        return n == 2;
+    }
+
+    for (int i = 3; i <= (n / i); i++) {
+        if(n % i == 0) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool Is_Prime_Faster(int n) {
+
+    if(n < 2) {
+        return false;
+    }
+
+    if(n % 2 == 0) {
+        return n == 2;
+    }
+
+    for (int i = 3; i <= (n / i); i += 2) {
         if(n % i == 0) {
             return false;
         }
@@ -18,18 +41,25 @@ bool Is_Prime(int n) {
 
 bool Prime(int n) {
 
-    if(n == 1) {
+    if(n < 2) {
         return false;
     }
-
-    if (n == 2 || n == 3) {
+    
+    if(n < 4) {
         return true;
     }
-
-    bool decrement = (n - 1) % 6 == 0 ? false : true;
-    bool increment = (n + 1) % 6 == 0 ? false : true;
-
-    return decrement | increment;
+    
+    if (n % 2 == 0 || n % 3 == 0) {
+        return false ;
+    }
+    
+    for(int i = 5 ; i <= (n / i); i+= 6) {
+        if(n % i == 0 || n % (i + 2) == 0) {
+            return false ;
+        }
+    }
+    
+    return true;
 
 }
 
@@ -40,9 +70,10 @@ void Solve() {
     cin >> n;
 
     string naive = Is_Prime(n) ? "Prime" : "Not Prime";
+    string faster = Is_Prime_Faster(n) ? "Prime" : "Not Prime" ;
     string optimized = Prime(n) ? "Prime" : "Not Prime";
 
-    cout << "The " << n << " Is Prime or not according to \nNaive (O(sqrt(n))):- " << naive << "\nOptimized (O(1)) :- " << optimized << endl;
+    cout << "The " << n << " Is Prime or not according to \nNaive (O(sqrt(n))):- " << naive << "\nFaster (O(sqrt(n))) :- " << faster << "\nOptimized (O(1)) :- "   << optimized  << endl;
 
     return;
 }
