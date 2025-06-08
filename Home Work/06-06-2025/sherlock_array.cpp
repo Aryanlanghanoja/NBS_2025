@@ -30,29 +30,30 @@ public:
 
     string balancedSums(vector<int> &arr) {
     
-        int n = arr.size();
-        vector<int> prefix(n , 0) ;
-        vector<int> suffix(n , 0);
+        int n = arr.size() ;
+        int i = 0 ;
+        int j = n - 1 ;
+        int left_sum = arr[i] ;
+        int right_sum = arr[j] ;
         
-        prefix[0] = arr[0] ;
-        
-        for(int i = 1 ; i < n ; i++) {
-            prefix[i] = prefix[i-1] + arr[i];
-        }
-        
-        suffix[n-1] = arr[n-1];
-        
-        for(int i = n-2 ; i >= 0 ; i--) {
-            suffix[i] = suffix[i+1] + arr[i];
-        }
-        
-        for(int i = 0 ; i < n ; i++) {
-            if(prefix[i] == suffix[i]) {
+        while(i <= j) {
+            
+            if(left_sum == right_sum && i == j) {
                 return "YES" ;
             }
-        }
+            
+            else if(left_sum < right_sum) {
+                i++;
+                left_sum += arr[i] ;
+            }
+            
+            else {
+                j--;
+                right_sum += arr[j] ;
+            }
+        } 
         
-        return "NO";
+        return "NO" ;
     }
 };
 
