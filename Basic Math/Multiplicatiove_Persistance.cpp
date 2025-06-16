@@ -1,41 +1,60 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int digit(int n) {
-    int digit = 0;
+int calc_multiplication(int num) {
 
-    if(n < 10) {
-        return 1;
-    }
+    int ans = 1 ;
 
-    int count = 0; 
-
-    while(n) {
-        count++;
-        n /= 10;
-    }
-}
-
-int calc_mul(int n) {
-    int ans = 1;
-
-    while(n) {
-        ans *= n;
-        n /= 10;
+    while(num) {
+        ans *= num % 10;
+        num /= 10;
     }
 
     return ans;
 }
 
-int helper(int n) {
-    int num_digit = digit(n);
-    int mul = calc_mul(n);
-    int steps = 1;
+int calc_addition(int num) {
 
-    while(num_digit != 1 ) {
-        int mul = calc_mul(n);
-        n = mul;
-        num_digit = digit(n);
+    int ans = 0 ;
+
+    while(num) {
+        ans += num % 10;
+        num /= 10;
+    }
+
+    return ans;
+}
+
+int num_digit(int num) {
+    if(num == 0) {
+        return 1;
+    }
+
+    else {
+        return floor(log10(abs(num))) + 1;
+    }
+}
+
+int additive_persistence(int num) {
+    int steps = 0;
+    int digit = num_digit(num);
+
+    while(digit > 1) {
+        num = calc_addition(num);
+        digit = num_digit(num);
+        steps++;
+    }
+
+    return steps;
+}
+
+int multiplicative_persistence(int num) {
+    int steps = 0;
+    int digit = num_digit(num);
+
+    while(digit > 1) {
+        num = calc_multiplication(num);
+        digit = num_digit(num);
         steps++;
     }
 
@@ -44,11 +63,13 @@ int helper(int n) {
 
 int main() {
 
-    int n;
-    cin >> n;
+    int num;
 
-    int ans = helper(n);
-    cout << ans << endl;
+    cout << "Enter the Number :- " << endl;
+    cin >> num;
+
+    cout << "Additive Persistence Is :- " << additive_persistence(num) << endl;
+    cout << "Multiplicative Persistence Is :- " << multiplicative_persistence(num) << endl;
 
     return 0;
 }
