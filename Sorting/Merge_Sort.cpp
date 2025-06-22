@@ -10,10 +10,10 @@ void Print_Array(vector<int> &Array) {
 }
 
 
-void Merge(vector<int> &Array_1 , vector<int> &Array_2 , vector<int> &Array) {
+void Merge(vector<int> &Array_1 , vector<int> &Array_2 , vector<int> &Array , int left) {
     int i = 0 ; 
     int j = 0 ;
-    int k = 0 ;
+    int k = left ;
     int m = Array_1.size();
     int n = Array_2.size() ;
 
@@ -23,7 +23,7 @@ void Merge(vector<int> &Array_1 , vector<int> &Array_2 , vector<int> &Array) {
         }
 
         else {
-            Array[k++] = Array_2[j++];          
+            Array[k++] = Array_2[j++];
         }
     }
 
@@ -32,7 +32,7 @@ void Merge(vector<int> &Array_1 , vector<int> &Array_2 , vector<int> &Array) {
     }
 
     while(j < n) {
-        Array[k++] = Array_2[j++];         
+        Array[k++] = Array_2[j++];
     }
 }
 
@@ -43,10 +43,10 @@ void Merge_Sort(vector<int> &Array , int left , int right) {
         Merge_Sort(Array, left, mid);
         Merge_Sort(Array, mid + 1, right);
 
-        vector<int> lower(Array.begin() , Array.begin() + mid) ;
-        vector<int> upper(Array.begin() + mid , Array.end());
+        vector<int> lower(Array.begin() + left, Array.begin() + mid + 1);
+        vector<int> upper(Array.begin() + mid + 1, Array.begin() + right + 1);
 
-        Merge(lower , upper , Array);
+        Merge(lower , upper , Array , left);
     }
 }
 

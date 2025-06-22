@@ -1,39 +1,30 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-void Print(int n , int k) {
+void print(int n) {
 
-    if(n > k) {
-        cout << endl;
-        return;
+    if(n < (1 << 15)) {
+        print((n << 15) + 1);
     }
 
-    cout << n << " ";
-    return Print(n + 1, k);
+    else {
+        if((n >> 15) == (n & ((1 << 15) - 1))) {
+            cout << (n & ((1 << 15) - 1)) << "#" ;
+        }
+
+        else {
+            cout << (n & ((1 << 15) - 1)) << " " ;
+            print(n + 1);
+        }
+    }
 }
 
 int main() {
 
-    int lower;
-    int upper;
-    bool direction;
+    int n ;
 
-    cout << "Enter The Lower Bound :- ";
-    cin >> lower;
-
-    cout << "Enter The Upper Bound :- ";
-    cin >> upper;
-
-    cout << "Enter the Direction (0 - Decrement , 1 - Increment) :- ";
-    cin >> direction;
-
-    if(direction) {
-        Print(lower, upper);
-    }
-
-    else {
-        Print(upper, lower);
-    }
+    cin >> n ;
+    print(n);
 
     return 0;
 }
