@@ -108,7 +108,7 @@ unordered_map<int, int> prime_factors_list(int n)
         counter++;
     }
 
-    cout << counter << endl;
+    cout << "Iterations :- " << counter << endl;
 
     return factors;
 }
