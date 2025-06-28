@@ -1,74 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector<pair<int, int>> ramanujan(int n)
+void Calculate()
 {
-    vector<int> cubes(217);
+    const int N = 1e6;
+    map<long long, vector<pair<int, int>>> cubeSums;
 
-    for (int i = 0; i < 217; i++)
+    for (int i = 1; i <= N; ++i)
     {
-        cubes[i] = i * i * i;
-    }
-
-    vector<pair<int, int>> numwithindex;
-
-    for (int i = 0; i < 217; i++)
-    {
-        numwithindex.push_back({cubes[i], i});
-    }
-
-    sort(numwithindex.begin(), numwithindex.end());
-
-    int left = 1;
-    int right = 216;
-
-    vector<pair<int, int>> answers;
-
-    while (left < right)
-    {
-        int sum = numwithindex[left].first + numwithindex[right].first;
-
-        if (sum == n)
+        for (int j = i; j <= N; ++j)
         {
-            answers.push_back({numwithindex[left].second, numwithindex[right].second});
-            left++;
-            right--;
-        }
-
-        else if (sum < n)
-        {
-            left++;
-        }
-
-        else
-        {
-            right--;
+            long long sum = 1LL * i * i * i + 1LL * j * j * j;
+            cubeSums[sum].push_back({i, j});
         }
     }
 
-    return answers;
+    for (const auto &entry : cubeSums)
+    {
+        if (entry.second.size() == 2)
+        {
+            cout << entry.first << " = "
+                 << entry.second[0].first << "^3 + " << entry.second[0].second << "^3 and "
+                 << entry.second[1].first << "^3 + " << entry.second[1].second << "^3\n";
+        }
+    }
+
+    return;
 }
 
 int main()
 {
 
-    for (int i = 0; i <= 1e7; i++)
-    {
-        vector<pair<int, int>> ans = ramanujan(i);
+    int n;
+    cin >> n;
 
-        if (!ans.empty())
-        {
-
-            cout << i << " :- " << endl;
-
-            for (pair<int, int> &p : ans)
-            {
-                cout << p.first << " " << p.second << endl;
-            }
-
-            cout << "-----------------------------------------------------------------------------" << endl;
-        }
-    }
+    cout << n << endl;
+    // Calculate()
 
     return 0;
 }
