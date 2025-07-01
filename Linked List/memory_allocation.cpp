@@ -18,6 +18,17 @@ public:
         this->val = val;
         this->next = nullptr;
     }
+
+    ListNode(int val, ListNode *next)
+    {
+        this->val = val;
+        this->next = next;
+    }
+
+    // ListNode(ListNode *obj)
+    // {
+    //     this = obj;
+    // }
 };
 
 class LinkedList
@@ -38,10 +49,12 @@ public:
 
     void Print_List();
 
-    void Insert_Node(int val);
+    void Insert_Node_Tail(int val);
+
+    void Insert_Node_Head(int val);
 };
 
-void LinkedList::Insert_Node(int val)
+void LinkedList::Insert_Node_Tail(int val)
 {
     ListNode *newNode = new ListNode(val);
 
@@ -63,25 +76,34 @@ void LinkedList::Insert_Node(int val)
     return;
 }
 
+void LinkedList::Insert_Node_Head(int val)
+{
+    ListNode *newNode = new ListNode(val, head);
+    head = newNode;
+    return;
+}
+
 void LinkedList::Print_List()
 {
     ListNode *itr = head;
 
-    while (itr->next != nullptr)
+    while (itr != nullptr)
     {
         cout << itr->val << " -> ";
         itr = itr->next;
     }
-    cout << itr->val << endl;
+    cout << "NULL" << endl;
 }
 
 int main()
 {
 
     LinkedList linkedList;
-    linkedList.Insert_Node(10);
-    linkedList.Insert_Node(20);
-    linkedList.Insert_Node(30);
+    linkedList.Insert_Node_Tail(10);
+    linkedList.Insert_Node_Tail(20);
+    linkedList.Insert_Node_Tail(30);
+    linkedList.Print_List();
+    linkedList.Insert_Node_Head(0);
     linkedList.Print_List();
 
     return 0;
