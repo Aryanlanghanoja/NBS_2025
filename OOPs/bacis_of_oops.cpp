@@ -1,55 +1,23 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Person
+class Base
 {
 public:
-    string name;
-    int age;
-
-    Person()
+    virtual void print()
     {
-        cout << "Person Constructor - Parent" << endl;
-    }
-
-    Person(string name, int age) : name(name), age(age)
-    {
-        cout << "Values are assigned Successfully. From Person (Parent)" << endl;
-    };
-    // {
-    //     this->name = name;
-    //     this->age = age;
-    // }
-
-    ~Person()
-    {
-        cout << "Person Destructor - Parent" << endl;
+        cout << "Base";
     }
 };
-
-class Student : public Person
+class Derived : public Base
 {
 public:
-    int rollNo;
-
-    Student()
-    {
-        cout << "Student Constructor - Child" << endl;
-    }
-
-    Student(string name, int age, int rollNo) : Person(name, age), rollNo(rollNo)
-    {
-        cout << "Values are assigned Successfully. From Student (Child)" << endl;
-    };
-
-    ~Student()
-    {
-        cout << "Student Destructor - Child" << endl;
-    }
+    void print() { cout << "Derived"; }
 };
-
 int main()
 {
-    Student s1("Aryan Langhanoja", 20, 30);
+    Base *b = new Derived();
+    b->print();
+    delete b;
     return 0;
 }
