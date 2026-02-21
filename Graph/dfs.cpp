@@ -6,7 +6,7 @@ class Solution
 {
 
 private:
-    void DFS(vector<vector<int>> &adj, int v, vector<bool> &visited, vector<int> &dfsTraversal, int curr)
+    void DFS_Helper(vector<vector<int>> &adj, int v, vector<bool> &visited, vector<int> &dfsTraversal, int curr)
     {
         dfsTraversal.push_back(curr);
         visited[curr] = true;
@@ -15,7 +15,7 @@ private:
         {
             if (!adj[curr][i])
             {
-                DFS(adj, v, visited, dfsTraversal, adj[curr][i]);
+                DFS_Helper(adj, v, visited, dfsTraversal, adj[curr][i]);
             }
         }
 
@@ -30,13 +30,13 @@ public:
         vector<bool> visited(v, false);
         vector<int> dfsTraversal;
 
-        DFS(adj, v, visited, dfsTraversal, 0);
+        DFS_Helper(adj, v, visited, dfsTraversal, 0);
 
         for (int i = 0; i < v; i++)
         {
             if (!visited[i])
             {
-                DFS(adj, v, visited, dfsTraversal, i);
+                DFS_Helper(adj, v, visited, dfsTraversal, i);
             }
         }
 

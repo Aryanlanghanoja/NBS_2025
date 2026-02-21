@@ -73,7 +73,7 @@ void PSI(vector<int> &Array)
 
 int main()
 {
-    vector<int> Array = {1, 7, 9, 5, 8, 10};
+    vector<int> Array = {4, 5, 3, 7, 2, 11};
 
     cout << "Original Array :- " << endl;
     Print_Array(Array);
